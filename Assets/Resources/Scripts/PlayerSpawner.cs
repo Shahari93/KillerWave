@@ -15,7 +15,7 @@ public class PlayerSpawner : MonoBehaviour
     private void CreatePlayer()
     {
         // Create the player
-        actorModel = GameObject.Instantiate(Resources.Load("Resources/Scripts/ScriptableObject/Player_Default")) as SOActorModel; // instantiate the player ship ScriptableObject asset and store it in the actorModel variable
+        actorModel = GameObject.Instantiate(Resources.Load("Scripts/ScriptableObject/Player_Default")) as SOActorModel; // instantiate the player ship ScriptableObject asset and store it in the actorModel variable
         playerShip = GameObject.Instantiate(actorModel.actor) as GameObject; // instantiate a game object that refers to our ScriptableObject that holds the game object called actor in our object variable named playerShip
         playerShip.GetComponent<Player>().ActorStats(actorModel); // we apply our ScriptableObject asset to the playerShip method called ActorStats that exists in the Player component script
 
