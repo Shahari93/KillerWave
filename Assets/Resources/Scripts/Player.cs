@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour, IActorTemplate
 {
     GameObject actor; // actor is the threedimensional model used to represent the player
     GameObject fire; // fire variable is the three-dimensional model of which the player fires
-    GameObject _Player; // The _Player variable will be used as a reference to the _Player game object in the scene.
+    GameObject _Player; // The _Player variable will be used as a reference to the _Player game object in the scene. (Empty game object that holds the player spwaner and player model)
     int travelSpeed;
     int hitPower;
     int health;
@@ -49,12 +50,56 @@ public class Player : MonoBehaviour, IActorTemplate
         _Player = GameObject.Find("_Player");
     }
 
-    //private void Update()
-    //{
-    //    Movement();
-    //    Attack();
-    //}
+    private void Update()
+    {
+        Movement();
+        Attack();
+    }
 
+    private void Attack()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            GameObject bullet = GameObject.Instantiate(fire, this.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
+            bullet.transform.SetParent(_Player.transform);
+            bullet.transform.localScale = new Vector3(7, 7, 7);
+        }
+    }
+
+    private void Movement()
+    {
+        if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            if (transform.localPosition.x < width + width / 0.9f)
+            {
+                transform.localPosition += Vector3.Normalize(new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0));
+            }
+        }
+
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            if (transform.localPosition.x > width + width / 6f)
+            {
+                transform.localPosition += Vector3.Normalize(new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0));
+            }
+        }
+
+        if (Input.GetAxisRaw("Vertical") < 0)
+        {
+            if (transform.localPosition.y > -height / 3f)
+            {
+                transform.localPosition += Vector3.Normalize(new Vector3(0, Input.GetAxisRaw("Vertical") * Time.deltaTime * travelSpeed, 0));
+            }
+        }
+
+        if (Input.GetAxisRaw("Vertical") > 0)
+        {
+            if (transform.localPosition.y < height / 2.5f)
+            {
+                transform.localPosition += Vector3.Normalize(new Vector3(0, Input.GetAxisRaw("Vertical") * Time.deltaTime * travelSpeed, 0));
+            }
+        }
+    }
 
     //The code we have just entered assigns values from the player's SOActorModel ScriptableObject asset we made earlier
     public void ActorStats(SOActorModel actorModel)
@@ -65,20 +110,41 @@ public class Player : MonoBehaviour, IActorTemplate
         fire = actorModel.actorBullets;
     }
 
-
+    public void TakeDamage(int incomingDamage)
+    {
+        health -= incomingDamage;
+    }
 
     public int SendDamage()
     {
-        throw new System.NotImplementedException();
+        return hitPower;
     }
 
-    public void TakeDamage(int incomingDamage)
+    private void OnTriggerEnter(Collider other)
     {
-        throw new System.NotImplementedException();
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (health >= 1)
+            {
+                if (transform.Find("energy +1(Clone)")) // checks to see whether the collider has a game object named energy + 1(Clone). (The name of this object is the name of the shield the player can purchase in the game shop)
+                {
+                    Destroy(transform.Find("energy + 1(Clone)").gameObject);
+                    health -= other.GetComponent<IActorTemplate>().SendDamage();
+                }
+                else
+                {
+                    health -= 1;
+                }
+            }
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
     }
 
     public void Die()
     {
-        throw new System.NotImplementedException();
+        Destroy(this.gameObject);
     }
 }

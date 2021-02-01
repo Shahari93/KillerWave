@@ -12,7 +12,7 @@ public class SOActorModel : ScriptableObject
     public int health;
     public int speed;
     public int shootPower;
-    public GameObject actor;
+    public GameObject actor; // the 3D model
     public GameObject actorBullets;
     public AttackType attackType;
     public enum AttackType { wave, flee, bullet, player };
