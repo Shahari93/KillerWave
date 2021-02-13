@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IActorTemplate
 {
-    GameObject actor; // actor is the threedimensional model used to represent the player
+    GameObject actor; // actor is the three dimensional model used to represent the player
     GameObject fire; // fire variable is the three-dimensional model of which the player fires
     GameObject _Player; // The _Player variable will be used as a reference to the _Player game object in the scene. (Empty game object that holds the player spwaner and player model)
     int travelSpeed;
