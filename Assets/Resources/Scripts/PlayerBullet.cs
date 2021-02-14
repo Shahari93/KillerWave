@@ -6,7 +6,7 @@ public class PlayerBullet : MonoBehaviour, IActorTemplate
     int hitPower;
     int health;
     int travelSpeed;
-    [SerializeField] SOActorModel playerBulletSO;
+    [SerializeField] SOActorModel playerBulletSO = null;
 
     private void Awake()
     {

@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Attack()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             GameObject bullet = GameObject.Instantiate(fire, this.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
             bullet.transform.SetParent(_Player.transform);
@@ -68,35 +68,37 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Movement()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0)
+        float horMove = Input.GetAxisRaw("Horizontal");
+        float verMove = Input.GetAxisRaw("Vertical");
+        if (horMove > 0)
         {
             if (transform.localPosition.x < width + width / 0.9f)
             {
-                transform.localPosition += Vector3.Normalize(new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0));
+                transform.localPosition += Vector3.Normalize(new Vector3(horMove * Time.deltaTime * travelSpeed, 0, 0));
             }
         }
 
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        if (horMove < 0)
         {
             if (transform.localPosition.x > width + width / 6f)
             {
-                transform.localPosition += Vector3.Normalize(new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0));
+                transform.localPosition += Vector3.Normalize(new Vector3(horMove * Time.deltaTime * travelSpeed, 0, 0));
             }
         }
 
-        if (Input.GetAxisRaw("Vertical") < 0)
+        if (verMove < 0)
         {
             if (transform.localPosition.y > -height / 3f)
             {
-                transform.localPosition += Vector3.Normalize(new Vector3(0, Input.GetAxisRaw("Vertical") * Time.deltaTime * travelSpeed, 0));
+                transform.localPosition += Vector3.Normalize(new Vector3(0, verMove * Time.deltaTime * travelSpeed, 0));
             }
         }
 
-        if (Input.GetAxisRaw("Vertical") > 0)
+        if (verMove > 0)
         {
             if (transform.localPosition.y < height / 2.5f)
             {
-                transform.localPosition += Vector3.Normalize(new Vector3(0, Input.GetAxisRaw("Vertical") * Time.deltaTime * travelSpeed, 0));
+                transform.localPosition += Vector3.Normalize(new Vector3(0, verMove * Time.deltaTime * travelSpeed, 0));
             }
         }
     }
