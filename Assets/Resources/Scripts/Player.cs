@@ -147,6 +147,7 @@ public class Player : MonoBehaviour, IActorTemplate
 
     public void Die()
     {
+        GameManager.Instance.LiveLost(); //we can call the GameManager script directly without finding the game object in the scene
         Destroy(this.gameObject);
     }
 }

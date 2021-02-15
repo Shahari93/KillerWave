@@ -172,6 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6630346964091087}
   - component: {fileID: -6650691001362456504}
+  - component: {fileID: 5669350109465700514}
   m_Layer: 0
   m_Name: enemy_wave
   m_TagString: Enemy
@@ -208,3 +209,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5669350109465700514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630346964589807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8bb133b76fba24ab14ce7d4eb42a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalSpeed: 2.31
+  verticalAmplitute: 0.5

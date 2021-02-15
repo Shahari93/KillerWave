@@ -12,6 +12,7 @@ public class SOActorModel : ScriptableObject
     public int health;
     public int speed;
     public int shootPower;
+    public int score;
     public GameObject actor; // the 3D model
     public GameObject actorBullets;
     public AttackType attackType;
