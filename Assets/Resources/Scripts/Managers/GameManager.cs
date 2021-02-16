@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
         if (playerLives >= 1)
         {
             playerLives--;
-            Debug.Log("Lost live: " + playerLives);
             GetComponent<ScenesManager>().ResetScene(); // getting component from the GameManager Game Object
         }
         else 

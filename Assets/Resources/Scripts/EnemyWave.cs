@@ -46,7 +46,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerBullet"))
         {
             if (health >= 1)
             {
@@ -55,6 +55,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
             if (health <= 0)
             {
                 GameManager.Instance.GetComponent<ScoreManager>().SetScore(score);
+                Debug.Log("End Score: " + GameManager.Instance.GetComponent<ScoreManager>().PlayerScore);
                 Die();
             }
         }
