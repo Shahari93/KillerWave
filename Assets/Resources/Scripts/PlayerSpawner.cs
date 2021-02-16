@@ -22,6 +22,7 @@ public class PlayerSpawner : MonoBehaviour
         // Setup the player
         playerShip.transform.rotation = Quaternion.Euler(0, 180, 0); // Set the starting rotation of the player gameobject
         playerShip.transform.localScale = new Vector3(60, 60, 60); // Set the starting size of the player gameobject
+        playerShip.GetComponentInChildren<ParticleSystem>().transform.localScale = new Vector3(25, 25, 25); //accesses the player's ship's ParticleSystem component and changes its scale to 25 on all axes
         playerShip.name = "Player"; // Set the name of the game object
         playerShip.transform.SetParent(this.transform); // Set the player game object to be a child of the empty game object (_Player)
         playerShip.transform.position = Vector3.zero; // Set the position to start at vector 0
