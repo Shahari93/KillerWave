@@ -20,7 +20,7 @@ public class PlayerBullet : MonoBehaviour, IActorTemplate
 
     public void ActorStats(SOActorModel actorModel)
     {
-        hitPower = actorModel.shootPower;
+        hitPower = actorModel.hitPower;
         health = actorModel.health;
         travelSpeed = actorModel.speed;
         actor = actorModel.actor;

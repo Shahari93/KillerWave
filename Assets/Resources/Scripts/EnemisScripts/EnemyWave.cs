@@ -30,7 +30,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     {
         health = actorModel.health;
         travelSpeed = actorModel.speed;
-        hitPower = actorModel.shootPower;
+        hitPower = actorModel.hitPower;
         score = actorModel.score;
     }
 

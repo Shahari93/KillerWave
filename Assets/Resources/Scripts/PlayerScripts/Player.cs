@@ -107,7 +107,7 @@ public class Player : MonoBehaviour, IActorTemplate
     public void ActorStats(SOActorModel actorModel)
     {
         health = actorModel.health;
-        hitPower = actorModel.shootPower;
+        hitPower = actorModel.hitPower;
         travelSpeed = actorModel.speed;
         fire = actorModel.actorBullets;
     }
