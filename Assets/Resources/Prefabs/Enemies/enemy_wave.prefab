@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6630346964091083}
   - component: {fileID: 6630346967482605}
   - component: {fileID: 6630346966516269}
+  - component: {fileID: 6305975322626341467}
   m_Layer: 0
   m_Name: enemy_wave_ring
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2d28ca67d996c140a3cc5dfdc04a003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6305975322626341467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630346964589803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43334ecb212296a47968ee337d42daa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ringRotationSpeed: 200
 --- !u!1 &6630346964589805
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 257e3c3af51cbaf4e9839db4fb0ce098, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
