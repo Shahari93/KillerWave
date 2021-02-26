@@ -16,7 +16,7 @@ MonoBehaviour:
   actorDescription: Typically in groups
   health: 1
   speed: -30
-  shootPower: 1
+  hitPower: 1
   score: 200
   actor: {fileID: 6630346964589807, guid: 28b22807469414f43a1056cfe0d24428, type: 3}
   actorBullets: {fileID: 0}
