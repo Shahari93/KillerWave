@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6305975322626341467}
   m_Layer: 0
   m_Name: enemy_wave_ring
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: c2d28ca67d996c140a3cc5dfdc04a003, type: 2}
   - {fileID: 2100000, guid: c2d28ca67d996c140a3cc5dfdc04a003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -108,7 +109,7 @@ GameObject:
   - component: {fileID: 6630346966516271}
   m_Layer: 0
   m_Name: enemy_wave_core
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 257e3c3af51cbaf4e9839db4fb0ce098, type: 2}
   - {fileID: 2100000, guid: 257e3c3af51cbaf4e9839db4fb0ce098, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

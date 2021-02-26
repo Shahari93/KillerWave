@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
-
+/// <summary>
+/// Creates the wave pattern of the enemies and thier movement
+/// </summary>
 public class EnemyWave : MonoBehaviour, IActorTemplate
 {
     int health;
@@ -22,7 +24,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     private void Attack()
     {
         time += Time.deltaTime;
-        sinVer.y = Mathf.Sin(time * verticalSpeed) * verticalAmplitute;
+        sinVer.y = Mathf.Sin(time * verticalSpeed) * verticalAmplitute; // creates a sin wave for the enemies movement
         transform.position = new Vector3(transform.position.x + travelSpeed * Time.deltaTime, transform.position.y + sinVer.y, transform.position.z);
     }
 
