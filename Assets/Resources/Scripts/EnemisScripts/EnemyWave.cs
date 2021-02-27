@@ -21,6 +21,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
         Attack();
     }
 
+    // Creates the wave pattern
     private void Attack()
     {
         time += Time.deltaTime;
@@ -28,6 +29,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
         transform.position = new Vector3(transform.position.x + travelSpeed * Time.deltaTime, transform.position.y + sinVer.y, transform.position.z);
     }
 
+    // acts like a constructor of the scriptable object
     public void ActorStats(SOActorModel actorModel)
     {
         health = actorModel.health;
@@ -57,7 +59,6 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
             if (health <= 0)
             {
                 GameManager.Instance.GetComponent<ScoreManager>().SetScore(score);
-                Debug.Log("End Score: " + GameManager.Instance.GetComponent<ScoreManager>().PlayerScore);
                 Die();
             }
         }

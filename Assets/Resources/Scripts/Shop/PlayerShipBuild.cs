@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class PlayerShipBuild : MonoBehaviour
 {
+    [Header("Purchse")]
+    [SerializeField] GameObject[] weaponVisuals;
+    [SerializeField] SOActorModel defaultPlayerShip;
+    GameObject playerShip;
+    GameObject buyButton;
+    GameObject bankObj;
+    int bankBalace = 600;
+    bool isPurchasMade = false;
+
+    [Header("Shop Buttons")]
     [SerializeField] GameObject[] shopbuttons;
     GameObject textBoxPanel;
     GameObject target;
@@ -14,6 +24,16 @@ public class PlayerShipBuild : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         textBoxPanel = GameObject.Find("textBoxPanel");
         TurnOffSelectionHighlight();
+
+        bankObj = GameObject.Find("bank");
+        bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
+        buyButton = textBoxPanel.transform.Find("BUY ?").gameObject;
+
+        //reset the visuals of the player's ship.
+        //TurnOffPlayerShipVisuals();
+
+        // creates a player's ship so that when it has all the upgrades applied, it can be sent into the game to be played.
+        //PreparePlayerShipForUpgrade();
     }
 
     private void TurnOffSelectionHighlight() // setting the selection quad off at the start of the game
@@ -55,8 +75,38 @@ public class PlayerShipBuild : MonoBehaviour
                     TurnOffSelectionHighlight(); // turn off every selection quad
                     Select();
                     UpdateDescriptionBox();
+
+                    ////UPGRADE NOT ALREADY SOLD
+                    if (target.transform.Find("itemText").GetComponent<TextMesh>().text != "SOLD")
+                    {
+                        // have coins
+                        Affordable();
+                        //lack of coins
+                        LackOfCredits();
+                    }
+                    else if (target.transform.Find("itemText").GetComponent<TextMesh>().text == "SOLD")
+                    {
+                        //SoldOut();
+                    }
                 }
             }
+        }
+    }
+
+    //checks whether the bank integer is equal or greater than the value of the button that we have selected(target).
+    void Affordable()
+    {
+        if (bankBalace >= System.Int32.Parse(target.transform.GetComponent<ShopPiece>().SOShopSelection.itemCost)) // bankBalance is int, and itemCost is string
+        {
+            Debug.Log("Can Buy");
+            buyButton.SetActive(true);
+        }
+    }
+    void LackOfCredits()
+    {
+        if(bankBalace<System.Int32.Parse(target.transform.GetComponent<ShopPiece>().SOShopSelection.itemCost))
+        {
+            Debug.Log("Can't Buy");
         }
     }
 

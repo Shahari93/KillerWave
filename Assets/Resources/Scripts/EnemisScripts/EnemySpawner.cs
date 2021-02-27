@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+// TODO: Try to refactor the EnemySpawner class to use the prototype design pattern
 
-public class EnemySpawner : MonoBehaviour/*, IActorTemplate*/
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] SOActorModel soActorModel = null;
     [SerializeField] float spawnRate = 0;

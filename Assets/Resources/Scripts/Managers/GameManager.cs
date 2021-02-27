@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     GameObject dirLight;
     public static int playerLives = 3; // how many lifes the player have at the start
     public static int currentSceneIndex = 0; //keep the number of the current scene we are on
-    public static int gameplaySceneInBuild = 3; //hold the first level we play, which we will use later on in this chapter.
+    public static int gameplaySceneInBuild = 3; //hold the first level we play, which we will use later on
 
     private bool died = false;
     public bool Died
