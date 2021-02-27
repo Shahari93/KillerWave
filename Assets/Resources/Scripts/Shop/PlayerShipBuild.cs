@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+//using UnityEngine.Advertisements;
+using System;
 
 public class PlayerShipBuild : MonoBehaviour
 {
@@ -19,6 +22,14 @@ public class PlayerShipBuild : MonoBehaviour
     GameObject tempSelection; // store the raycast selection so that we can check to see what we have made contact with
     Camera mainCamera = null;
 
+    //[Header("Ads")]
+    //public string gameID = "123456";
+    //public string myAdPlacement = "rewardedvideo";
+    //public bool adStarted;
+    //private bool testMode = true;
+
+
+
     private void Start()
     {
         isPurchasMade = false;
@@ -35,7 +46,23 @@ public class PlayerShipBuild : MonoBehaviour
 
         // creates a player's ship so that when it has all the upgrades applied, it can be sent into the game to be played.
         PreparePlayerShipForUpgrade();
+
+        //Check on which platform the user is playing the game
+        //CheckPlatform();
     }
+
+    //private void CheckPlatform()
+    //{
+    //    if (Application.platform == RuntimePlatform.IPhonePlayer)
+    //    {
+    //        gameID = "4029714";
+    //    }
+    //    else if (Application.platform == RuntimePlatform.Android)
+    //    {
+    //        gameID = "4029715";
+    //    }
+    //    Advertisement.Initialize(gameID, false);
+    //}
 
     private void TurnOffSelectionHighlight() // setting the selection quad off at the start of the game
     {
@@ -106,8 +133,6 @@ public class PlayerShipBuild : MonoBehaviour
         }
     }
 
-
-
     //checks whether the bank integer is equal or greater than the value of the button that we have selected(target).
     void Affordable()
     {
@@ -132,7 +157,10 @@ public class PlayerShipBuild : MonoBehaviour
 
     private void WatchAds()
     {
-
+        //if (Application.internetReachability != NetworkReachability.NotReachable) // checking if the user have good internet
+        //{
+        //    ShowRewardedAds();
+        //}
     }
 
     private void BuyItem()
@@ -164,10 +192,10 @@ public class PlayerShipBuild : MonoBehaviour
 
     private void StartGame()
     {
-        if(isPurchasMade)
+        if (isPurchasMade)
         {
             playerShip.name = "Upgraded Ship";
-            if(playerShip.transform.Find("energy +1(Clone)"))
+            if (playerShip.transform.Find("energy +1(Clone)"))
             {
                 playerShip.GetComponent<Player>().Health = 2;
             }
@@ -205,4 +233,34 @@ public class PlayerShipBuild : MonoBehaviour
         textBoxPanel.transform.Find("name").gameObject.GetComponent<TextMesh>().text = tempSelection.GetComponentInParent<ShopPiece>().SOShopSelection.iconName;
         textBoxPanel.transform.Find("desc").gameObject.GetComponent<TextMesh>().text = tempSelection.GetComponentInParent<ShopPiece>().SOShopSelection.iconDescription;
     }
+
+    //void ShowRewardedAds()
+    //{
+    //    StartCoroutine(WaitForAd());
+    //}
+    //IEnumerator WaitForAd()
+    //{
+    //    if (!Advertisement.IsReady(myAdPlacement))
+    //    {
+    //        yield return null;
+    //    }
+    //    if (Advertisement.isInitialized && Advertisement.IsReady(myAdPlacement) && !adStarted)
+    //    {
+    //        Advertisement.Show(myAdPlacement);
+    //        adStarted = true;
+    //        bankBalace += 300;
+    //        bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
+    //        TurnOffSelectionHighlight();
+    //    }
+    //}
+
+    //private void AdFinished(UnityEngine.Monetization.ShowResult result)
+    //{
+    //    //if (result == UnityEngine.Monetization.ShowResult.Finished)
+    //    //{
+    //    //    bankBalace += 300;
+    //    //    bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
+    //    //    TurnOffSelectionHighlight();
+    //    //}
+    //}
 }
