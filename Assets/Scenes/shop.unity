@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21539005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1950579529129072, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+  m_PrefabInstance: {fileID: 1985318099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314166637
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,12 +214,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314166637}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &672783276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1088013412868314, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+  m_PrefabInstance: {fileID: 1985318099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578713084
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +261,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -305,6 +315,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1155821259, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+      propertyPath: bankBalace
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155821259, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+      propertyPath: weaponVisuals.Array.data[1]
+      value: 
+      objectReference: {fileID: 21539005}
+    - target: {fileID: 1155821259, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+      propertyPath: weaponVisuals.Array.data[2]
+      value: 
+      objectReference: {fileID: 672783276}
     - target: {fileID: 1624764302995810, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
       propertyPath: m_Name
       value: ShopManager

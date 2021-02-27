@@ -1613,7 +1613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 478ae8d433606fd439d4ae04ca0a1fce, type: 2}
+  - {fileID: 2100000, guid: 6a4d4714fa6e8aa48aadefaa49cdf2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2554,6 +2554,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d8a6216d78f574484ea549e8006e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponVisuals:
+  - {fileID: 1556134829789958}
+  - {fileID: 1950579529129072}
+  - {fileID: 1088013412868314}
+  defaultPlayerShip: {fileID: 11400000, guid: 2a006e7088df25641bd07ff6b3d26a25, type: 2}
   shopbuttons:
   - {fileID: 1142615361867556}
   - {fileID: 1428807205164630}

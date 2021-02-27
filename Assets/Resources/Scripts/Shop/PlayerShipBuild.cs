@@ -1,19 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerShipBuild : MonoBehaviour
 {
     [Header("Purchse")]
-    [SerializeField] GameObject[] weaponVisuals;
-    [SerializeField] SOActorModel defaultPlayerShip;
+    [SerializeField] GameObject[] weaponVisuals = null;
+    [SerializeField] SOActorModel defaultPlayerShip = null;
     GameObject playerShip;
     GameObject buyButton;
     GameObject bankObj;
-    int bankBalace = 600;
+    [SerializeField] int bankBalace = 600;
     bool isPurchasMade = false;
 
     [Header("Shop Buttons")]
-    [SerializeField] GameObject[] shopbuttons;
+    [SerializeField] GameObject[] shopbuttons = null;
     GameObject textBoxPanel;
     GameObject target;
     GameObject tempSelection; // store the raycast selection so that we can check to see what we have made contact with
@@ -21,6 +20,7 @@ public class PlayerShipBuild : MonoBehaviour
 
     private void Start()
     {
+        isPurchasMade = false;
         mainCamera = FindObjectOfType<Camera>();
         textBoxPanel = GameObject.Find("textBoxPanel");
         TurnOffSelectionHighlight();
@@ -30,10 +30,10 @@ public class PlayerShipBuild : MonoBehaviour
         buyButton = textBoxPanel.transform.Find("BUY ?").gameObject;
 
         //reset the visuals of the player's ship.
-        //TurnOffPlayerShipVisuals();
+        TurnOffPlayerShipVisuals();
 
         // creates a player's ship so that when it has all the upgrades applied, it can be sent into the game to be played.
-        //PreparePlayerShipForUpgrade();
+        PreparePlayerShipForUpgrade();
     }
 
     private void TurnOffSelectionHighlight() // setting the selection quad off at the start of the game
@@ -86,12 +86,26 @@ public class PlayerShipBuild : MonoBehaviour
                     }
                     else if (target.transform.Find("itemText").GetComponent<TextMesh>().text == "SOLD")
                     {
-                        //SoldOut();
+                        SoldOut();
                     }
+                }
+                else if (target.name == "WATCH AD")
+                {
+                    WatchAds();
+                }
+                else if (target.name == "BUY ?")
+                {
+                    BuyItem();
+                }
+                else if (target.name == "START")
+                {
+                    StartGame();
                 }
             }
         }
     }
+
+
 
     //checks whether the bank integer is equal or greater than the value of the button that we have selected(target).
     void Affordable()
@@ -104,10 +118,68 @@ public class PlayerShipBuild : MonoBehaviour
     }
     void LackOfCredits()
     {
-        if(bankBalace<System.Int32.Parse(target.transform.GetComponent<ShopPiece>().SOShopSelection.itemCost))
+        if (bankBalace < System.Int32.Parse(target.transform.GetComponent<ShopPiece>().SOShopSelection.itemCost))
         {
             Debug.Log("Can't Buy");
         }
+    }
+
+    void SoldOut()
+    {
+        Debug.Log("SOLD OUT");
+    }
+
+    private void WatchAds()
+    {
+
+    }
+
+    private void BuyItem()
+    {
+        Debug.Log("Purchased");
+        isPurchasMade = true;
+        buyButton.SetActive(false);
+        tempSelection.SetActive(false);
+        for (int i = 0; i < weaponVisuals.Length; i++)
+        {
+            if (weaponVisuals[i].name == tempSelection.transform.parent.gameObject.GetComponent<ShopPiece>().SOShopSelection.iconName)
+            {
+                weaponVisuals[i].SetActive(true);
+            }
+        }
+        UpgradeToShip(tempSelection.transform.parent.gameObject.GetComponent<ShopPiece>().SOShopSelection.iconName);
+        bankBalace -= System.Int32.Parse(tempSelection.transform.parent.GetComponent<ShopPiece>().SOShopSelection.itemCost); //using System.Int32.Parse, so it reads the string value as an int value
+        bankObj.transform.Find("bankText").GetComponent<TextMesh>().text = bankBalace.ToString();
+        tempSelection.transform.parent.transform.Find("itemText").GetComponent<TextMesh>().text = "SOLD";
+    }
+
+    //This method will load the game object of the item purchased to the player ship we play in our game
+    private void UpgradeToShip(string upgrade)
+    {
+        
+    }
+
+    private void StartGame()
+    {
+
+    }
+
+
+    // turn off every weapon visual in the game at the start of the scene
+    private void TurnOffPlayerShipVisuals()
+    {
+        for (int i = 0; i < weaponVisuals.Length; i++)
+        {
+            weaponVisuals[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void PreparePlayerShipForUpgrade()
+    {
+        playerShip = GameObject.Instantiate(Resources.Load(("Prefabs/Player/player_ship"))) as GameObject;
+        playerShip.GetComponent<Player>().enabled = false;
+        playerShip.transform.position = new Vector3(0, 010000, 0);
+        playerShip.GetComponent<IActorTemplate>().ActorStats(defaultPlayerShip);
     }
 
     private void Select()
