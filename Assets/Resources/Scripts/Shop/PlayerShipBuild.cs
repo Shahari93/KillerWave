@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerShipBuild : MonoBehaviour
 {
@@ -156,12 +157,23 @@ public class PlayerShipBuild : MonoBehaviour
     //This method will load the game object of the item purchased to the player ship we play in our game
     private void UpgradeToShip(string upgrade)
     {
-        
+        GameObject shipItem = GameObject.Instantiate(Resources.Load("Prefabs/Player/" + upgrade)) as GameObject;
+        shipItem.transform.SetParent(playerShip.transform);
+        shipItem.transform.localPosition = Vector3.zero;
     }
 
     private void StartGame()
     {
-
+        if(isPurchasMade)
+        {
+            playerShip.name = "Upgraded Ship";
+            if(playerShip.transform.Find("energy +1(Clone)"))
+            {
+                playerShip.GetComponent<Player>().Health = 2;
+            }
+            DontDestroyOnLoad(playerShip);
+        }
+        SceneManager.LoadScene("testLevel");
     }
 
 
