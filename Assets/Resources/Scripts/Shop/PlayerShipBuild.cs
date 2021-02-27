@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using UnityEngine.Advertisements;
+using UnityEngine.Advertisements;
+using UnityEngine.Monetization;
 using System;
 
-public class PlayerShipBuild : MonoBehaviour
+public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
 {
     [Header("Purchse")]
     [SerializeField] GameObject[] weaponVisuals = null;
@@ -22,16 +23,17 @@ public class PlayerShipBuild : MonoBehaviour
     GameObject tempSelection; // store the raycast selection so that we can check to see what we have made contact with
     Camera mainCamera = null;
 
-    //[Header("Ads")]
-    //public string gameID = "123456";
-    //public string myAdPlacement = "rewardedvideo";
-    //public bool adStarted;
-    //private bool testMode = true;
+    [Header("Ads")]
+    public string gameID = "123456";
+    public string placementId_rewardedvideo = "rewardedVideo";
+    public bool adStarted;
+    private bool testMode = true;
 
 
 
     private void Start()
     {
+        Advertisement.AddListener(this);
         isPurchasMade = false;
         mainCamera = FindObjectOfType<Camera>();
         textBoxPanel = GameObject.Find("textBoxPanel");
@@ -48,21 +50,25 @@ public class PlayerShipBuild : MonoBehaviour
         PreparePlayerShipForUpgrade();
 
         //Check on which platform the user is playing the game
-        //CheckPlatform();
+        CheckPlatform();
     }
 
-    //private void CheckPlatform()
-    //{
-    //    if (Application.platform == RuntimePlatform.IPhonePlayer)
-    //    {
-    //        gameID = "4029714";
-    //    }
-    //    else if (Application.platform == RuntimePlatform.Android)
-    //    {
-    //        gameID = "4029715";
-    //    }
-    //    Advertisement.Initialize(gameID, false);
-    //}
+    private void CheckPlatform()
+    {
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            gameID = "4029714";
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            gameID = "4029715";
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            gameID = "4029715";
+        }
+        Advertisement.Initialize(gameID, testMode);
+    }
 
     private void TurnOffSelectionHighlight() // setting the selection quad off at the start of the game
     {
@@ -119,6 +125,7 @@ public class PlayerShipBuild : MonoBehaviour
                 }
                 else if (target.name == "WATCH AD")
                 {
+                    Debug.Log("Pressed");
                     WatchAds();
                 }
                 else if (target.name == "BUY ?")
@@ -157,10 +164,11 @@ public class PlayerShipBuild : MonoBehaviour
 
     private void WatchAds()
     {
-        //if (Application.internetReachability != NetworkReachability.NotReachable) // checking if the user have good internet
-        //{
-        //    ShowRewardedAds();
-        //}
+        if (Application.internetReachability != NetworkReachability.NotReachable) // checking if the user have good internet
+        {
+            Debug.Log("Has internet");
+            ShowRewardedAds();
+        }
     }
 
     private void BuyItem()
@@ -234,33 +242,58 @@ public class PlayerShipBuild : MonoBehaviour
         textBoxPanel.transform.Find("desc").gameObject.GetComponent<TextMesh>().text = tempSelection.GetComponentInParent<ShopPiece>().SOShopSelection.iconDescription;
     }
 
-    //void ShowRewardedAds()
-    //{
-    //    StartCoroutine(WaitForAd());
-    //}
-    //IEnumerator WaitForAd()
-    //{
-    //    if (!Advertisement.IsReady(myAdPlacement))
-    //    {
-    //        yield return null;
-    //    }
-    //    if (Advertisement.isInitialized && Advertisement.IsReady(myAdPlacement) && !adStarted)
-    //    {
-    //        Advertisement.Show(myAdPlacement);
-    //        adStarted = true;
-    //        bankBalace += 300;
-    //        bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
-    //        TurnOffSelectionHighlight();
-    //    }
-    //}
+    void ShowRewardedAds()
+    {
+        Debug.Log("Coroutine");
+        StartCoroutine(WaitForAd());
+    }
+    IEnumerator WaitForAd()
+    {
+        string placementId = placementId_rewardedvideo;
+        while (!Advertisement.IsReady(placementId))
+        {
+            yield return null;
+        }
+        Advertisement.Show(placementId);
 
-    //private void AdFinished(UnityEngine.Monetization.ShowResult result)
-    //{
-    //    //if (result == UnityEngine.Monetization.ShowResult.Finished)
-    //    //{
-    //    //    bankBalace += 300;
-    //    //    bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
-    //    //    TurnOffSelectionHighlight();
-    //    //}
-    //}
+    }
+
+    public void OnUnityAdsReady(string placementId)
+    {
+
+    }
+
+    public void OnUnityAdsDidError(string message)
+    {
+
+    }
+
+    public void OnUnityAdsDidStart(string placementId)
+    {
+
+    }
+
+    public void OnUnityAdsDidFinish(string placementId, UnityEngine.Advertisements.ShowResult showResult)
+    {
+        if (showResult == UnityEngine.Advertisements.ShowResult.Finished)
+        {
+            bankBalace += 300;
+            bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
+            TurnOffSelectionHighlight();
+        }
+    }
 }
+//ShowAdPlacementContent ad = null;
+//ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
+
+//if (ad != null)
+//{
+//    ad.Show(AdFinished);
+//}
+//private void AdFinished(UnityEngine.Monetization.ShowResult result)
+//{
+//    if (result == UnityEngine.Monetization.ShowResult.Failed)
+//    {
+//        
+//    }
+//}

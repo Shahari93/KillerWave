@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: weaponVisuals.Array.data[2]
       value: 
       objectReference: {fileID: 672783276}
+    - target: {fileID: 1155821259, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
+      propertyPath: gameID
+      value: 123456
+      objectReference: {fileID: 0}
     - target: {fileID: 1624764302995810, guid: 719e15d0742034c4e95c1ed63e7a2d66, type: 3}
       propertyPath: m_Name
       value: ShopManager
