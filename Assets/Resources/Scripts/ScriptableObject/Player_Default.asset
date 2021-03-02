@@ -19,5 +19,6 @@ MonoBehaviour:
   hitPower: 1
   score: 0
   actor: {fileID: 6828751649331044918, guid: 91d048fe3a18e3c46b09e8e0735092e3, type: 3}
-  actorBullets: {fileID: 7273179175193858056, guid: e26ee8b15ba0c0248a9e4e4b86ec6ab0, type: 3}
+  actorBullets: {fileID: 7273179175193858056, guid: e26ee8b15ba0c0248a9e4e4b86ec6ab0,
+    type: 3}
   attackType: 3
