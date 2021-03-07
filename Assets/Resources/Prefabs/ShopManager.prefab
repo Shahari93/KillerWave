@@ -2560,6 +2560,7 @@ MonoBehaviour:
   - {fileID: 1950579529129072}
   - {fileID: 1088013412868314}
   defaultPlayerShip: {fileID: 11400000, guid: 2a006e7088df25641bd07ff6b3d26a25, type: 2}
+  bankBalace: 600
   shopbuttons:
   - {fileID: 1142615361867556}
   - {fileID: 1428807205164630}
@@ -2571,6 +2572,9 @@ MonoBehaviour:
   - {fileID: 1143424165573212}
   - {fileID: 1000621732617846}
   - {fileID: 1199454306863072}
+  gameID: 123456
+  placementId_rewardedvideo: rewardedVideo
+  adStarted: 0
 --- !u!1 &1624764302995810
 GameObject:
   m_ObjectHideFlags: 0

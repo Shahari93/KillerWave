@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, IActorTemplate
             {
                 if (transform.Find("energy +1(Clone)")) // checks to see whether the collider has a game object named energy + 1(Clone). (The name of this object is the name of the shield the player can purchase in the game shop)
                 {
-                    Destroy(transform.Find("energy + 1(Clone)").gameObject);
+                    Destroy(transform.Find("energy +1(Clone)").gameObject);
                     health -= other.GetComponent<IActorTemplate>().SendDamage();
                 }
                 else

@@ -197,6 +197,10 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
         GameObject shipItem = GameObject.Instantiate(Resources.Load("Prefabs/Player/" + upgrade)) as GameObject;
         shipItem.transform.SetParent(playerShip.transform);
         shipItem.transform.localPosition = Vector3.zero;
+        if(shipItem.name == "c. Bomb(Clone)")
+        {
+            shipItem.transform.localPosition = new Vector3(0, -.6f, 0);
+        }
     }
 
     private void StartGame()
@@ -284,17 +288,3 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
         }
     }
 }
-//ShowAdPlacementContent ad = null;
-//ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
-
-//if (ad != null)
-//{
-//    ad.Show(AdFinished);
-//}
-//private void AdFinished(UnityEngine.Monetization.ShowResult result)
-//{
-//    if (result == UnityEngine.Monetization.ShowResult.Failed)
-//    {
-//        
-//    }
-//}
