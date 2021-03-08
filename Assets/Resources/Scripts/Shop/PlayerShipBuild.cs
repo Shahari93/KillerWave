@@ -199,7 +199,7 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
         shipItem.transform.localPosition = Vector3.zero;
         if(shipItem.name == "c. Bomb(Clone)")
         {
-            shipItem.transform.localPosition = new Vector3(0, -.6f, 0);
+            shipItem.transform.localPosition = new Vector3(0, -.6f, 0.615f);
         }
     }
 
@@ -231,7 +231,7 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
     {
         playerShip = GameObject.Instantiate(Resources.Load(("Prefabs/Player/player_ship"))) as GameObject;
         playerShip.GetComponent<Player>().enabled = false;
-        playerShip.transform.position = new Vector3(0, 010000, 0);
+        playerShip.transform.position = new Vector3(0, 10000, 0);
         playerShip.GetComponent<IActorTemplate>().ActorStats(defaultPlayerShip);
     }
 
