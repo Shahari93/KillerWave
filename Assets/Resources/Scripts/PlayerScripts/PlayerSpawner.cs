@@ -11,7 +11,6 @@ public class PlayerSpawner : MonoBehaviour
     void Start()
     {
         CreatePlayer();
-        GetComponentInChildren<Player>().enabled = true;
     }
 
     private void CreatePlayer()
@@ -38,6 +37,7 @@ public class PlayerSpawner : MonoBehaviour
         playerShip.name = "Player";
         playerShip.transform.SetParent(this.transform);
         playerShip.transform.position = Vector3.zero;
+        playerShip.GetComponent<PlayerTransition>().enabled = true; // This line of code will make our player ship animate into the scene.
     }
 }
 //// Create the player

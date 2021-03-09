@@ -4856,8 +4856,9 @@ GameObject:
   - component: {fileID: 6828751649329118454}
   - component: {fileID: -8594533163742259982}
   - component: {fileID: 997654361}
-  - component: {fileID: -6953990132707703573}
   - component: {fileID: 783411390980019457}
+  - component: {fileID: -6953990132707703573}
+  - component: {fileID: -4150699755870653168}
   m_Layer: 8
   m_Name: player_ship
   m_TagString: Player
@@ -4958,18 +4959,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6953990132707703573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6828751649331044918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf654cfb82611a4abf088eb0bd49c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &783411390980019457
 Light:
   m_ObjectHideFlags: 0
@@ -5031,3 +5020,27 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-6953990132707703573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6828751649331044918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf654cfb82611a4abf088eb0bd49c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4150699755870653168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6828751649331044918}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564bce23868a65d49a7f6c4847cbbfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
