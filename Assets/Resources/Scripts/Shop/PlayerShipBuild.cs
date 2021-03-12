@@ -214,7 +214,7 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
             }
             DontDestroyOnLoad(playerShip);
         }
-        SceneManager.LoadScene("testLevel");
+        SceneManager.LoadScene("level1");
     }
 
 

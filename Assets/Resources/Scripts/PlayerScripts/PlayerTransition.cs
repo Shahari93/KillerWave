@@ -22,7 +22,7 @@ public class PlayerTransition : MonoBehaviour
     bool gameCompleted = false; // will be set to true when the whole game will be completed
 
     // we will be using those 2 properties to get access to the 2 bools from other scripts
-    bool LevelEnd
+    public bool LevelEnd
     {
         get
         {
@@ -35,7 +35,7 @@ public class PlayerTransition : MonoBehaviour
         }
     }
 
-    bool GameCompleted
+    public bool GameCompleted
     {
         get
         {
