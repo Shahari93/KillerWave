@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             playerLives--;
             GetComponent<ScenesManager>().ResetScene(); // getting component from the GameManager Game Object
         }
-        else 
+        else
         {
             playerLives = 3; // reseting the player lives back to 3
             GetComponent<ScenesManager>().GameOver();
