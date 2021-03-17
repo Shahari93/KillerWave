@@ -39,6 +39,37 @@ public class GameManager : MonoBehaviour
         LightAndCameraSetup(currentSceneIndex);
     }
 
+    private void Start()
+    {
+        SetLivesDisplay(playerLives);
+    }
+
+    public void SetLivesDisplay(int livesAmount)
+    {
+        if (GameObject.Find("lives")) // checking if there is a game object named lives
+        {
+            GameObject lives = GameObject.Find("lives"); // store it in a gameobject
+            if (lives.transform.childCount < 1) // if it has no child
+            {
+                for (int i = 0; i < livesAmount; i++)
+                {
+                    GameObject life = GameObject.Instantiate(Resources.Load("Prefabs/life")) as GameObject; // instantiate 4 life game objects
+                    life.transform.SetParent(lives.transform);
+                }
+            }
+            // set visuals
+            for (int i = 0; i < lives.transform.childCount; i++)
+            {
+                lives.transform.GetChild(i).localScale = new Vector3(1, 1, 1);
+            }
+
+            // remove visuals
+            for (int i = 0; i < (lives.transform.childCount - livesAmount); i++)
+            {
+                lives.transform.GetChild(lives.transform.childCount - livesAmount).localScale = Vector3.zero;
+            }
+        }
+    }
 
     private void CheckGameManagerIsInTheScene() // Our singleton pattern
     {
