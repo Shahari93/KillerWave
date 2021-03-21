@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScenesManager : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class ScenesManager : MonoBehaviour
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene aScene, LoadSceneMode aMode)
     {
         GetComponent<GameManager>().SetLivesDisplay(GameManager.playerLives);
+        // If the score game object is in the scene
+        if(GameObject.Find("Score"))
+        {
+            GameObject.Find("Score").GetComponent<Text>().text = GetComponent<ScoreManager>().PlayerScore.ToString();
+        }
     }
 
     private void Update()
