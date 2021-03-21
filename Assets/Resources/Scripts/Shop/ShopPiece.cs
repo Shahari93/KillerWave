@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopPiece : MonoBehaviour
 {
@@ -19,13 +18,13 @@ public class ShopPiece : MonoBehaviour
 
     private void Awake()
     {
-        if(GetComponentInChildren<SpriteRenderer>() !=null) // checks if there is sprite renderer component 
+        if(transform.GetChild(3).GetComponent<Image>() !=null)
         {
-            GetComponentInChildren<SpriteRenderer>().sprite = shopSelection.icon;
+            transform.GetChild(3).GetComponent<Image>().sprite = shopSelection.icon;
         }
-        if(transform.Find("itemText")) // showing the cost of the item in the selection grid
+        if(transform.Find("itemText"))
         {
-            GetComponentInChildren<TextMesh>().text = shopSelection.itemCost;
+            GetComponentInChildren<Text>().text = shopSelection.itemCost.ToString();
         }
     }
 }
