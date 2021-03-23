@@ -5,7 +5,7 @@ using UnityEngine.Monetization;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
-public class PlayerShipBuild : MonoBehaviour
+public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
 {
     [SerializeField]
     GameObject[] visualWeapons;
@@ -14,6 +14,7 @@ public class PlayerShipBuild : MonoBehaviour
     GameObject buyButton;
     GameObject tmpSelection;
     int bankBalace = 600;
+    bool isPurchasMade = false;
 
     bool purchaseMade = false;
     [SerializeField]
@@ -29,7 +30,8 @@ public class PlayerShipBuild : MonoBehaviour
 
     void Start()
     {
-        purchaseMade = false;
+        Advertisement.AddListener(this);
+        isPurchasMade = false;
         bankObj = GameObject.Find("bank");
         bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
         textBoxPanel = GameObject.Find("textBoxPanel");
@@ -65,7 +67,7 @@ public class PlayerShipBuild : MonoBehaviour
         }
         Advertisement.Initialize(gameID, testMode);
     }
-    private void WatchAds()
+    public void WatchAds()
     {
         if (Application.internetReachability != NetworkReachability.NotReachable) // checking if the user have good internet
         {
@@ -160,13 +162,13 @@ public class PlayerShipBuild : MonoBehaviour
         Debug.Log("SOLD OUT");
     }
 
-    public void WatchAdvert()
-    {
-        if (Application.internetReachability != NetworkReachability.NotReachable)
-        {
-            ShowRewardedAds();
-        }
-    }
+    //public void WatchAdvert()
+    //{
+    //    if (Application.internetReachability != NetworkReachability.NotReachable)
+    //    {
+    //        ShowRewardedAds();
+    //    }
+    //}
     public void BuyItem()
     {
         Debug.Log("PURCHASED");
@@ -218,7 +220,7 @@ public class PlayerShipBuild : MonoBehaviour
 
     public void AttemptSelection(GameObject buttonName)
     {
-        if(buttonName)
+        if (buttonName)
         {
             TurnOffSelectionHighlights();
             tmpSelection = buttonName;
@@ -236,9 +238,16 @@ public class PlayerShipBuild : MonoBehaviour
             //can not afford
             LackOfCredits();
         }
-        //else if (buttonName.GetComponentInChildren<Text>().text == "SOLD")
-        //{
-        //    SoldOut();
-        //}
+
+        else if (target.name == "WATCH AD")
+        {
+            Debug.Log("Pressed");
+            WatchAds();
+        }
+
+        else if (buttonName.GetComponentInChildren<Text>().text == "SOLD")
+        {
+            SoldOut();
+        }
     }
 }
