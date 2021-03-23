@@ -15,4 +15,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1fc6dbc8c3b0215419cdc617b1f3a785, type: 3}
   iconName: energy +1
   iconDescription: Gain +1 health
-  itemCost: 100
+  itemCost: 450

@@ -15,4 +15,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6ed5376d571723c468eb82670c16757d, type: 3}
   iconName: c. Bomb
   iconDescription: Cluster Bomb
-  itemCost: 100
+  itemCost: 500
