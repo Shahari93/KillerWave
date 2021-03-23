@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             // remove visuals
             for (int i = 0; i < (lives.transform.childCount - livesAmount); i++)
             {
-                lives.transform.GetChild(lives.transform.childCount - i - 1 /*- livesAmount*/).localScale = Vector3.zero;
+                lives.transform.GetChild(lives.transform.childCount - i - 1).localScale = Vector3.zero;
             }
         }
     }

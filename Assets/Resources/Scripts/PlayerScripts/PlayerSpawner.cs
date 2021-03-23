@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     SOActorModel actorModel;
-    GameObject playerShip;
+    [HideInInspector] public GameObject playerShip;
     private bool isUpgradedShip = false;
 
     // Start is called before the first frame update
