@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
 {
     [SerializeField]
-    GameObject[] visualWeapons;
+    GameObject[] visualWeapons = null;
     GameObject textBoxPanel;
     GameObject bankObj;
     GameObject buyButton;
@@ -18,9 +18,9 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
 
     bool purchaseMade = false;
     [SerializeField]
-    SOActorModel defaultPlayerShip;
+    SOActorModel defaultPlayerShip = null;
     GameObject playerShip;
-    GameObject target;
+    GameObject target = null;
 
     [Header("Ads")]
     public string gameID = "123456";
@@ -239,11 +239,11 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
             LackOfCredits();
         }
 
-        else if (target.name == "WATCH AD")
-        {
-            Debug.Log("Pressed");
-            WatchAds();
-        }
+        //else if (target.name == "WATCH AD")
+        //{
+        //    Debug.Log("Pressed");
+        //    WatchAds();
+        //}
 
         else if (buttonName.GetComponentInChildren<Text>().text == "SOLD")
         {

@@ -16,7 +16,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     Vector3 sinVer;
     float time;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Attack();
     }

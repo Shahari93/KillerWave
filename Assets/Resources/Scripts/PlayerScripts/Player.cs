@@ -52,8 +52,12 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Update()
     {
-        Movement();
-        Attack();
+        //check to see if the game's timeScale is running at full speed(1) and then carries on with the Movement and Attack methods.
+        if (Time.timeScale == 1f)
+        {
+            Movement();
+            Attack();
+        }
     }
 
     private void Attack()
