@@ -1,11 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
+using UnityEngine.Audio; // in order to get the audio mixer we need to auido library
 
 public class PauseComponent : MonoBehaviour
 {
+    [SerializeField] AudioMixer audioMixer = null;
     [SerializeField] GameObject pauseScreen = null;
+    [SerializeField] GameObject musicSlider = null;
+    [SerializeField] GameObject effectsSlider = null;
     [SerializeField] private float delayTime = 2.5f;
 
     private void Awake()
@@ -52,7 +54,7 @@ public class PauseComponent : MonoBehaviour
         SetPauseButtonActive(false); //Turn off the pause button (because we have the QUIT button to use instead).
         Time.timeScale = 0f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
     }
-    //TODO: Set a timer that show the player when he can come back to play
+    //TODO: Set a timer of 3 seconds after the player pressed on resume
     public void ResumeGame()
     {
         pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
@@ -65,5 +67,16 @@ public class PauseComponent : MonoBehaviour
         Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
         GameManager.Instance.GetComponent<ScoreManager>().ResetScore();
         GameManager.Instance.GetComponent<ScenesManager>().BeginGame(0);
+    }
+
+    // setting the music volume by the value of the slider
+    public void SetMusicVolumeFromSlider()
+    {
+        audioMixer.SetFloat("musicVol"/*musicVol is the name of the music mixer*/, musicSlider.GetComponent<Slider>().value);
+    }
+
+    public void SetEffectVolumeFromSlider()
+    {
+        audioMixer.SetFloat("effectVol", effectsSlider.GetComponent<Slider>().value);
     }
 }
