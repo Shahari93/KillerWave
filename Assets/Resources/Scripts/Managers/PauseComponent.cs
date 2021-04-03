@@ -75,7 +75,7 @@ public class PauseComponent : MonoBehaviour
             areYouSureScreen.SetActive(false);
         }
     }
-    //TODO: Add a new screen that ask the player if he sure that he wants to quit
+
     public void AreYouSure()
     {
         Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
