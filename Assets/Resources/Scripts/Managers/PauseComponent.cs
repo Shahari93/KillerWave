@@ -5,16 +5,26 @@ using UnityEngine.Audio; // in order to get the audio mixer we need to auido lib
 public class PauseComponent : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer = null;
-    [SerializeField] GameObject pauseScreen = null;
     [SerializeField] GameObject musicSlider = null;
     [SerializeField] GameObject effectsSlider = null;
+    [SerializeField] GameObject pauseScreen = null;
+    [SerializeField] GameObject areYouSureScreen = null;
     [SerializeField] private float delayTime = 2.5f;
 
     private void Awake()
     {
         pauseScreen.SetActive(false);
+        areYouSureScreen.SetActive(false);
         SetPauseButtonActive(false);
-        Invoke("DelayPauseAppear", delayTime); // delay for 5 seconds until we run the DelayPauseAppear method
+        Invoke("DelayPauseAppear", delayTime); // delay for X seconds until we run the DelayPauseAppear method
+
+        //we are reapplying our saved PlayerPrefs values for our music and effects volume
+        audioMixer.SetFloat("musicVol", PlayerPrefs.GetFloat("musicVolome"));
+        audioMixer.SetFloat("effectVol", PlayerPrefs.GetFloat("effectVolome"));
+
+        //setting the value from the player prefs to the music slider
+        musicSlider.GetComponent<Slider>().value = GetMusicValueFromMixer();
+        effectsSlider.GetComponent<Slider>().value = GetEffectsValueFromMixer();
     }
 
     private void SetPauseButtonActive(bool switchButton)
@@ -60,23 +70,61 @@ public class PauseComponent : MonoBehaviour
         pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
         SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
         Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
+        if(areYouSureScreen.activeSelf)
+        {
+            areYouSureScreen.SetActive(false);
+        }
     }
     //TODO: Add a new screen that ask the player if he sure that he wants to quit
-    public void QuitGame()
+    public void AreYouSure()
     {
         Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
         GameManager.Instance.GetComponent<ScoreManager>().ResetScore();
         GameManager.Instance.GetComponent<ScenesManager>().BeginGame(0);
     }
 
-    // setting the music volume by the value of the slider
+    public void QuitGame()
+    {
+        //Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
+        pauseScreen.SetActive(false);
+        areYouSureScreen.SetActive(true);
+    }
+
     public void SetMusicVolumeFromSlider()
     {
-        audioMixer.SetFloat("musicVol"/*musicVol is the name of the music mixer*/, musicSlider.GetComponent<Slider>().value);
+        audioMixer.SetFloat("musicVol"/*musicVol is the name of the music mixer*/, musicSlider.GetComponent<Slider>().value); // setting the music volume by the value of the slider
+        PlayerPrefs.SetFloat("musicVolome", musicSlider.GetComponent<Slider>().value); // saving the music volume by the value of the slider to player prefs
     }
 
     public void SetEffectVolumeFromSlider()
     {
-        audioMixer.SetFloat("effectVol", effectsSlider.GetComponent<Slider>().value);
+        audioMixer.SetFloat("effectVol", effectsSlider.GetComponent<Slider>().value); // setting the effects volume by the value of the slider
+        PlayerPrefs.SetFloat("effectVolome", effectsSlider.GetComponent<Slider>().value); // saving the effects volume by the value of the slider to player prefs
+    }
+    float GetMusicValueFromMixer()
+    {
+        float musicMixerValue;
+        bool result = audioMixer.GetFloat("musicVol", out musicMixerValue); // checking if there is a key called musicVol in the audio mixer
+        if (result)
+        {
+            return musicMixerValue;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    float GetEffectsValueFromMixer()
+    {
+        float effectsMixerValue;
+        bool result = audioMixer.GetFloat("effectVol", out effectsMixerValue);
+        if(result)
+        {
+            return effectsMixerValue;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
