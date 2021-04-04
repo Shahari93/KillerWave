@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+//TODO: Find a way to keep the upgraded ship in the next levels
 public class GameManager : MonoBehaviour
 {
     GameObject mainCamera;

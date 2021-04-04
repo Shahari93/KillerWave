@@ -121,6 +121,10 @@ public class ScenesManager : MonoBehaviour
                             {
                                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerTransition>().GameCompleted = true;
                             }
+                            // TODO: change the parameter from string to int, and find how to get the last scene from the build settings
+                            SendInJsonFormat(SceneManager.GetActiveScene().name);
+
+
                             Invoke("NextLevel", 4);
                         }
                     }
@@ -131,6 +135,24 @@ public class ScenesManager : MonoBehaviour
                     GetComponentInChildren<AudioSource>().clip = null;
                     break;
                 }
+        }
+    }
+
+
+    // Only if the player finished the game
+    private void SendInJsonFormat(string lastLevel)
+    {
+        if(lastLevel == "level3")
+        {
+            // Write in the data for the Json format
+            GameStats gameStats = new GameStats();
+            gameStats.completeData = System.DateTime.Now.ToString(); // getting the real date of when the player completed the game
+            gameStats.score = ScoreManager.playerScore;
+            gameStats.livesLeft = GameManager.playerLives;
+            string json = JsonUtility.ToJson(gameStats,true); // set to true because we want to be able to read the data
+            Debug.Log(json);
+            Debug.Log(Application.persistentDataPath + "/GameStatsSaved.json"); // prints to the console where we save the json file
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/GameStatsSaved.json", json); // where we save the json file
         }
     }
 

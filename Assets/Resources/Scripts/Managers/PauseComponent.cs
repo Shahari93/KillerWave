@@ -89,7 +89,7 @@ public class PauseComponent : MonoBehaviour
         pauseScreen.SetActive(false);
         areYouSureScreen.SetActive(true);
     }
-
+    #region setting and getting sliders value
     public void SetMusicVolumeFromSlider()
     {
         audioMixer.SetFloat("musicVol"/*musicVol is the name of the music mixer*/, musicSlider.GetComponent<Slider>().value); // setting the music volume by the value of the slider
@@ -127,4 +127,5 @@ public class PauseComponent : MonoBehaviour
             return 0;
         }
     }
+    #endregion
 }
