@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  rsKeyList:
+  - metadata:
+      entityId: c1bc8e99-b959-400d-a15a-ad191c5a2b2a
+    rs:
+      key: PlayerStartUpLives
+      type: int
+      value: 4
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: c1bc8e99-b959-400d-a15a-ad191c5a2b2a
+    rs:
+      key: PlayerStartUpLives
+      type: int
+      value: 4
+  configId: d86e446f-cdaf-4366-98e3-a89f952c8ddc
+  currentEnvironmentId: 54f61941-a039-4c13-a9c1-72cdabd49e00
+  environments:
+  - id: 54f61941-a039-4c13-a9c1-72cdabd49e00
+    appId: 
+    name: Production (Default)
+    description: 
+    createdAt: 2021-04-04T20:41:23Z
+    updatedAt: 2021-04-04T20:41:23Z
+  - id: dbfb0d82-3dc9-40e3-aea2-eab7039336c8
+    appId: 
+    name: Developments
+    description: 
+    createdAt: 2021-04-04T20:42:51Z
+    updatedAt: 2021-04-04T20:42:51Z
+  - id: e343f01d-0b62-4af2-8e58-2100ffb4314a
+    appId: 
+    name: Release
+    description: 
+    createdAt: 2021-04-04T20:48:59Z
+    updatedAt: 2021-04-04T20:48:59Z
+  - id: 71088e91-2771-40f4-8ea9-ca836314c5b4
+    appId: 
+    name: Development
+    description: 
+    createdAt: 2021-04-04T20:48:59Z
+    updatedAt: 2021-04-04T20:48:59Z
+  rulesList:
+  - id: 96b6a742-a20b-4127-8c6e-75568cdff633
+    name: lives
+    enabled: 1
+    priority: 250
+    type: 
+    condition: true
+    rolloutPercentage: 100
+    value:
+    - metadata:
+        entityId: c1bc8e99-b959-400d-a15a-ad191c5a2b2a
+      rs:
+        key: PlayerStartUpLives
+        type: int
+        value: 4
+    startDate: 2021-04-04T20:45:56Z
+    endDate: 
+  lastCachedRulesList:
+  - id: 96b6a742-a20b-4127-8c6e-75568cdff633
+    name: lives
+    enabled: 1
+    priority: 250
+    type: 
+    condition: true
+    rolloutPercentage: 100
+    value:
+    - metadata:
+        entityId: c1bc8e99-b959-400d-a15a-ad191c5a2b2a
+      rs:
+        key: PlayerStartUpLives
+        type: int
+        value: 4
+    startDate: 2021-04-04T20:45:56Z
+    endDate: 
+  addedRulesIDs: []
+  updatedRulesIDs: []
+  deletedRulesIDs: []
