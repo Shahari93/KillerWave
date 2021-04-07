@@ -70,17 +70,10 @@ public class PauseComponent : MonoBehaviour
         SetPauseButtonActive(false); //Turn off the pause button (because we have the QUIT button to use instead).
         Time.timeScale = 0f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
     }
-    //TODO: Set a timer of 3 seconds after the player pressed on resume
+
     public void ResumeGame()
     {
-        StartCoroutine(Timer());
-        //pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
-        //SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
-        //Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
-        //if (areYouSureScreen.activeSelf)
-        //{
-        //    areYouSureScreen.SetActive(false);
-        //}
+        StartCoroutine(Timer()); // when the button is pressed the timer coroutine will work
     }
 
     public void AreYouSure()
@@ -110,8 +103,8 @@ public class PauseComponent : MonoBehaviour
             if (messageDisplay <= 0)
             {
                 SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
-                pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
                 timerText.gameObject.SetActive(false);
+                pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
                 Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
                 if (areYouSureScreen.activeSelf)
                 {
