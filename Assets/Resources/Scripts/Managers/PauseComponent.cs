@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio; // in order to get the audio mixer we need to auido library
 
@@ -10,12 +12,16 @@ public class PauseComponent : MonoBehaviour
     [SerializeField] GameObject pauseScreen = null;
     [SerializeField] GameObject areYouSureScreen = null;
     [SerializeField] private float delayTime = 2.5f;
+    [SerializeField] Text timerText = null;
+    public string[] messages;
+    public float intervalTime = 1;
 
     private void Awake()
     {
         pauseScreen.SetActive(false);
         areYouSureScreen.SetActive(false);
         SetPauseButtonActive(false);
+        timerText.gameObject.SetActive(false);
         Invoke("DelayPauseAppear", delayTime); // delay for X seconds until we run the DelayPauseAppear method
 
         //we are reapplying our saved PlayerPrefs values for our music and effects volume
@@ -67,13 +73,14 @@ public class PauseComponent : MonoBehaviour
     //TODO: Set a timer of 3 seconds after the player pressed on resume
     public void ResumeGame()
     {
-        pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
-        SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
-        Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
-        if(areYouSureScreen.activeSelf)
-        {
-            areYouSureScreen.SetActive(false);
-        }
+        StartCoroutine(Timer(1));
+        //pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
+        //SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
+        //Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
+        //if (areYouSureScreen.activeSelf)
+        //{
+        //    areYouSureScreen.SetActive(false);
+        //}
     }
 
     public void AreYouSure()
@@ -89,6 +96,31 @@ public class PauseComponent : MonoBehaviour
         pauseScreen.SetActive(false);
         areYouSureScreen.SetActive(true);
     }
+
+    /// Timer
+    public IEnumerator Timer(float interval)
+    {
+        timerText.gameObject.SetActive(true);
+        int messageDisplay = messages.Length - 1;
+        while (messageDisplay > 0)
+        {
+            timerText.text = messages[messageDisplay];
+            yield return new WaitForSeconds(interval);
+            messageDisplay -= 1;
+            if (messageDisplay <= 0)
+            {
+                pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
+                SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
+                Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
+                if (areYouSureScreen.activeSelf)
+                {
+                    areYouSureScreen.SetActive(false);
+                }
+            }
+        }
+
+    }
+
     #region setting and getting sliders value
     public void SetMusicVolumeFromSlider()
     {
@@ -118,7 +150,7 @@ public class PauseComponent : MonoBehaviour
     {
         float effectsMixerValue;
         bool result = audioMixer.GetFloat("effectVol", out effectsMixerValue);
-        if(result)
+        if (result)
         {
             return effectsMixerValue;
         }
