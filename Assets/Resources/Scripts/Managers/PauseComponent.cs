@@ -73,7 +73,7 @@ public class PauseComponent : MonoBehaviour
     //TODO: Set a timer of 3 seconds after the player pressed on resume
     public void ResumeGame()
     {
-        StartCoroutine(Timer(1));
+        StartCoroutine(Timer());
         //pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
         //SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
         //Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
@@ -98,27 +98,28 @@ public class PauseComponent : MonoBehaviour
     }
 
     /// Timer
-    public IEnumerator Timer(float interval)
+    public IEnumerator Timer()
     {
         timerText.gameObject.SetActive(true);
-        int messageDisplay = messages.Length - 1;
-        while (messageDisplay > 0)
+        int messageDisplay = messages.Length - 1; // start at 3
+        while (messageDisplay >= 0)
         {
             timerText.text = messages[messageDisplay];
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSecondsRealtime(intervalTime);
             messageDisplay -= 1;
             if (messageDisplay <= 0)
             {
-                pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
                 SetPauseButtonActive(true); //Turn off the pause button (because we have the QUIT button to use instead).
+                pauseScreen.SetActive(false); //We set the pause screen game object's activity to true
+                timerText.gameObject.SetActive(false);
                 Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
                 if (areYouSureScreen.activeSelf)
                 {
                     areYouSureScreen.SetActive(false);
+                    timerText.gameObject.SetActive(false);
                 }
             }
         }
-
     }
 
     #region setting and getting sliders value
