@@ -91,10 +91,14 @@ public class GameManager : MonoBehaviour
         {
             case 3:
             case 4:
+                {
+                    CameraSetup(0);
+                    LightSetup();
+                    break;
+                }
             case 5:
                 {
-                    CameraSetup();
-                    LightSetup();
+                    CameraSetup(150);
                     break;
                 }
         }
@@ -106,8 +110,9 @@ public class GameManager : MonoBehaviour
         dirLight.GetComponent<Light>().color = new Color32(152, 204, 255, 255); // Finally, it changes the light's color.
     }
 
-    private void CameraSetup()
+    private void CameraSetup(float camSpeed)
     {
+        mainCamera.GetComponent<CameraMovement>().CamSpeed = camSpeed;
         //Camera Transform
         mainCamera.transform.position = new Vector3(0, 0, -300f);
         mainCamera.transform.eulerAngles = new Vector3(0, 0, 0);

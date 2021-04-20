@@ -16,6 +16,22 @@ public class Player : MonoBehaviour, IActorTemplate
     float height;
     float width;
 
+
+    float camTravelSpeed;
+    public float CamTravelSpeed
+    {
+        get
+        {
+            return camTravelSpeed;
+        }
+        set
+        {
+            camTravelSpeed = value;
+        }
+    }
+    float moveingScreen; // will hold the result of Time.deltatime multiplied by camTravelspeed
+
+
     //The two public properties of Health and Fire are there to give access to
     //our two private health and fire variables from other classes that
     //require access.
@@ -48,6 +64,7 @@ public class Player : MonoBehaviour, IActorTemplate
         height = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f); // WorldToViewportPoint method take the results from the game's three-dimensional world space and convert the results into viewport space
         width = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f); // This will give us our current world space width of the screen.
         _Player = GameObject.Find("_Player");
+        moveingScreen = width;
     }
 
     private void Update()
@@ -72,11 +89,19 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Movement()
     {
+
+        if (camTravelSpeed > 1)
+        {
+            //we increment the player's ship's X-axis to the right multiplied by Time.deltatime and camTravelSpeed.
+            transform.position += Vector3.right * camTravelSpeed * Time.deltaTime;
+            moveingScreen += Time.deltaTime * camTravelSpeed;
+        }
+
         float horMove = Input.GetAxisRaw("Horizontal");
         float verMove = Input.GetAxisRaw("Vertical");
         if (horMove > 0)
         {
-            if (transform.localPosition.x < width + width / 0.9f)
+            if (transform.localPosition.x < moveingScreen + (width / 0.9f))
             {
                 transform.localPosition += Vector3.Normalize(new Vector3(horMove * Time.deltaTime * travelSpeed, 0, 0));
             }
@@ -84,7 +109,7 @@ public class Player : MonoBehaviour, IActorTemplate
 
         if (horMove < 0)
         {
-            if (transform.localPosition.x > width + width / 6f)
+            if (transform.localPosition.x > moveingScreen + width / 6f)
             {
                 transform.localPosition += Vector3.Normalize(new Vector3(horMove * Time.deltaTime * travelSpeed, 0, 0));
             }
