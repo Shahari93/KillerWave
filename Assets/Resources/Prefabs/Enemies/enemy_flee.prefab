@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3425736700549419830}
   - component: {fileID: 5227428057151863959}
   - component: {fileID: 8368338931096525592}
+  - component: {fileID: -9132072947598327270}
   m_Layer: 0
   m_Name: enemy_flee
   m_TagString: Enemy
@@ -119,3 +120,17 @@ CapsuleCollider:
   m_Height: 48.205826
   m_Direction: 1
   m_Center: {x: -2.8467617, y: 8.376094, z: 0.04518032}
+--- !u!114 &-9132072947598327270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425736700551679478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efaf6906878bae4f8868de803af280d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorModel: {fileID: 11400000, guid: 3e8a2d5381bbd7147b4844f088e6909b, type: 2}
+  enemyDistanceRun: 200
