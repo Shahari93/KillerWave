@@ -55,7 +55,7 @@ public class EnemyFlee : MonoBehaviour, IActorTemplate
 
     public void ActorStats(SOActorModel actorModel)
     {
-        navMesh.speed = actorModel.speed;
+        GetComponent<NavMeshAgent>().speed = actorModel.speed;
         health = actorModel.health;
         hitPower = actorModel.hitPower;
         score = actorModel.score;
