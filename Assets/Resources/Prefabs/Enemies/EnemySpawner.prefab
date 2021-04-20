@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soActorModel: {fileID: 11400000, guid: d3d57d62c53718446bb4d3576ba01ba2, type: 2}
   spawnRate: 2
-  quantity: 4
+  quantity: 5
