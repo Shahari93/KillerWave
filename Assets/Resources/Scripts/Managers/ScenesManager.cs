@@ -111,6 +111,10 @@ public class ScenesManager : MonoBehaviour
                         if (!gameEnding)
                         {
                             gameEnding = true;
+                            GameObject player = GameObject.Find("Player");
+                            player.GetComponent<Rigidbody>().isKinematic = true;
+                            Player.mobile = false;
+                            CancelInvoke(); //stop all invokes running in our scene
                             // if scene is not level 3
                             if (SceneManager.GetActiveScene().name != "level3")
                             {

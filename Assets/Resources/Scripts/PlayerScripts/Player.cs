@@ -9,7 +9,9 @@ public class Player : MonoBehaviour, IActorTemplate
     int travelSpeed;
     int hitPower;
     int health;
-
+    Vector3 direction; //will hold the player's touch screen location
+    Rigidbody rb;
+    public static bool mobile = false;
     //The last two variables of width and height will be used to store the
     //measured results of the world space dimensions of the screen the game is
     //played in.
@@ -60,6 +62,12 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Start()
     {
+        mobile = false;
+#if UNITY_ANDROID && !UNITY_EDITOR
+mobile = true;
+InvokeRepeating("Attack",0,0.3f);
+rb = GetComponent<Rigidbody>();
+#endif
         //viewport space is similar to what we know as a screen resolution, except its measurements, are in points and not pixels, and these points are measured from 0 to 1.
         height = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f); // WorldToViewportPoint method take the results from the game's three-dimensional world space and convert the results into viewport space
         width = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f); // This will give us our current world space width of the screen.
@@ -72,14 +80,49 @@ public class Player : MonoBehaviour, IActorTemplate
         //check to see if the game's timeScale is running at full speed(1) and then carries on with the Movement and Attack methods.
         if (Time.timeScale == 1f)
         {
-            Movement();
-            Attack();
+            PlayerSpeedWithCamera();
+            if (mobile)
+            {
+                MobileControl();
+            }
+            else
+            {
+                Movement();
+                Attack();
+            }
+        }
+    }
+
+    private void MobileControl()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 300));
+            touchPos.z = 0;
+            direction = (touchPos - transform.position);
+            rb.velocity = new Vector3(direction.x, direction.y, 0) * 5;
+            direction.x += moveingScreen;
+            if(touch.phase == TouchPhase.Ended)
+            {
+                rb.velocity = Vector3.zero;
+            }
+        }
+    }
+
+    private void PlayerSpeedWithCamera()
+    {
+        if (camTravelSpeed > 1)
+        {
+            //we increment the player's ship's X-axis to the right multiplied by Time.deltatime and camTravelSpeed.
+            transform.position += Vector3.right * camTravelSpeed * Time.deltaTime;
+            moveingScreen += Time.deltaTime * camTravelSpeed;
         }
     }
 
     private void Attack()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || mobile)
         {
             GameObject bullet = GameObject.Instantiate(fire, this.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
             bullet.transform.SetParent(_Player.transform);
@@ -89,14 +132,6 @@ public class Player : MonoBehaviour, IActorTemplate
 
     private void Movement()
     {
-
-        if (camTravelSpeed > 1)
-        {
-            //we increment the player's ship's X-axis to the right multiplied by Time.deltatime and camTravelSpeed.
-            transform.position += Vector3.right * camTravelSpeed * Time.deltaTime;
-            moveingScreen += Time.deltaTime * camTravelSpeed;
-        }
-
         float horMove = Input.GetAxisRaw("Horizontal");
         float verMove = Input.GetAxisRaw("Vertical");
         if (horMove > 0)
