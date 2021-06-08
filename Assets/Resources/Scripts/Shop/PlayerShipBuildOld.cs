@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
-using UnityEngine.Monetization;
-using System;
 
 //TODO: change the RV to work only one time in a game
 public class PlayerShipBuildOld : MonoBehaviour, IUnityAdsListener
