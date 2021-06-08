@@ -30,7 +30,12 @@ public class PlayerShipBuildOld : MonoBehaviour, IUnityAdsListener
     public bool adStarted;
     private bool testMode = true;
 
-
+    private void Awake()
+    {
+#if UNITY_ANDROID
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+#endif
+    }
 
     private void Start()
     {
