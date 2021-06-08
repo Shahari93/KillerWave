@@ -66,6 +66,11 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
 
     public void Die()
     {
+        // Create explode game object.
+        GameObject explode = Instantiate(Resources.Load("Prefab/explode")) as GameObject;
+
+        // The explode game object will be instantiated in the position of the enemy
+        explode.transform.position = this.gameObject.transform.position;
         Destroy(this.gameObject);
     }
 }

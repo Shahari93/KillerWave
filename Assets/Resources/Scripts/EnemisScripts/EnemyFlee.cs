@@ -71,6 +71,8 @@ public class EnemyFlee : MonoBehaviour, IActorTemplate
     }
     public void Die()
     {
+        GameObject explode = Instantiate(Resources.Load("Prefab/explode")) as GameObject;
+        explode.transform.position = this.gameObject.transform.position;
         Destroy(this.gameObject);
     }
 

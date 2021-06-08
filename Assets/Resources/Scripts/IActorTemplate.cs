@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-/// <summary>
+﻿/// <summary>
 /// our interface will be used by 6 classes that share the same behavior but we will implement those behaviors in a different way for each class
 /// </summary>
 public interface IActorTemplate 

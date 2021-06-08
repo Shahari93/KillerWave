@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 //TODO: Find a way to keep the upgraded ship in the next levels
 public class GameManager : MonoBehaviour
@@ -124,6 +125,12 @@ public class GameManager : MonoBehaviour
 
     public void LiveLost() // method that handle what happens when the player loses lives
     {
+        StartCoroutine(DelayedLifeLost());
+    }
+
+    IEnumerator DelayedLifeLost()
+    {
+        yield return new WaitForSeconds(2);
         if (playerLives >= 1)
         {
             playerLives--;

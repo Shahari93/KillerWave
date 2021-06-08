@@ -239,6 +239,8 @@ rb = GetComponent<Rigidbody>();
 
     public void Die()
     {
+        GameObject explode = Instantiate(Resources.Load("Prefab/explode")) as GameObject;
+        explode.transform.position = this.gameObject.transform.position;
         GameManager.Instance.LiveLost(); //we can call the GameManager script directly without finding the game object in the scene
         Destroy(this.gameObject);
     }
