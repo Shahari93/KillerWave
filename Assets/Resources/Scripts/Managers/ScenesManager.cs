@@ -183,5 +183,6 @@ public class ScenesManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("gameOver");
+        GameManager.playerLives = 3;
     }
 }

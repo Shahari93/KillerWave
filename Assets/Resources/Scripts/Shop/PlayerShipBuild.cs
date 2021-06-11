@@ -32,6 +32,10 @@ public class PlayerShipBuild : MonoBehaviour, IUnityAdsListener
     {
         Advertisement.AddListener(this);
         isPurchasMade = false;
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer)
+        {
+            GameObject.Find("AD").SetActive(false);
+        }
         bankObj = GameObject.Find("bank");
         bankObj.GetComponentInChildren<TextMesh>().text = bankBalace.ToString();
         textBoxPanel = GameObject.Find("textBoxPanel");

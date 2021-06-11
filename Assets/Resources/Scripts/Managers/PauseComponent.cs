@@ -88,6 +88,7 @@ public class PauseComponent : MonoBehaviour
         //Time.timeScale = 1f; // Set the game's timeScale to zero, which will stop all moving, animating objects in the scene.
         pauseScreen.SetActive(false);
         areYouSureScreen.SetActive(true);
+        GameManager.playerLives = 3;
     }
 
     /// Timer
