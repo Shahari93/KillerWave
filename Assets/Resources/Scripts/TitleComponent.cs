@@ -7,13 +7,16 @@ public class TitleComponent : MonoBehaviour
     // No need for this because now we set the amount of lives to X depents if the player is conected to the internet
     void Start()
     {
-        GameManager.playerLives = 3;
+        if (GameManager.playerLives <= 2)
+        {
+            GameManager.playerLives = 3;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             SceneManager.LoadScene("shop");
         }
